@@ -17,6 +17,9 @@ void (*op_func_select(void))(stack_t **h, unsigned int line_num)
 		{"swap", swap},
 		{"add", _add},
 		{"nop", nop},
+		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
 		{NULL, NULL}
 	};
 	while (ops[i].opcode != NULL)

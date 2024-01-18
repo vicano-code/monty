@@ -10,7 +10,12 @@ void push(stack_t **head, unsigned int line_num)
 {
 	stack_t *new, *tmp;
 
-	if (args[1] == NULL || sizeof(atoi(args[1])) != sizeof(int))
+	if (args[1] == NULL)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	if (strcmp(args[1], "0") != 0 && atoi(args[1]) == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
@@ -50,7 +55,7 @@ void pall(stack_t **head, unsigned int line_num)
 	stack_t *ptr;
 
 	(void)line_num;
-	if (*head != NULL)
+	if (head != NULL || *head != NULL)
 	{
 		ptr = *head;
 		while (ptr)
@@ -69,7 +74,7 @@ void pall(stack_t **head, unsigned int line_num)
  */
 void pint(stack_t **head, unsigned int line_num)
 {
-	if (head == NULL || *head == 0)
+	if (head == NULL || *head == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);

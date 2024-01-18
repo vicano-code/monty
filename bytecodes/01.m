@@ -1,8 +1,6 @@
-push 0
+push 1
+pint
 push 2
+pint
 push 3
-pall
-pop
-pop
-pop
 pint
