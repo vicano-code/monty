@@ -8,18 +8,32 @@
  */
 void _add(stack_t **head, unsigned int line_num)
 {
-	stack_t *ptr;
-	int result;
+	stack_t *ptr, *tmp;
+	int i = 0;
+	int j = 0;
+	int result = 0;
 
-	if ((*head)->next == NULL)
+	tmp = *head;
+	/* check if stack contains at least two elements */
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	if (i < 2)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-
-	ptr = (*head)->next;
-	result = (*head)->n + ptr->n;
-	ptr->n = result;
+	
+	ptr = *head;
+	while (j < 2)
+	{
+		result += ptr->n;
+		ptr = ptr->next;
+		j++;
+	}
+	(*head)->next->n = result;
 	pop(head, line_num);
 }
 
