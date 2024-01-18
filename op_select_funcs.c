@@ -1,9 +1,8 @@
 #include "monty.h"
 
 /**
- * op_select_func - select function for opcode
- * @h: head node of stack
- * @line_num: line number of opcode
+ * op_func_select - select function for opcode
+ * @void - no argument
  * Return: Nothing
  */
 void (*op_func_select(void))(stack_t **h, unsigned int line_num)
@@ -20,13 +19,10 @@ void (*op_func_select(void))(stack_t **h, unsigned int line_num)
 		{"nop", nop},
 		{NULL, NULL}
 	};
-
 	while (ops[i].opcode != NULL)
 	{
 		if (strcmp(args[0], ops[i].opcode) == 0)
-		{
 			return (ops[i].f);
-		}
 		i++;
 	}
 	return (NULL);

@@ -11,17 +11,9 @@ char *args[3];
 int main(int argc, char **argv)
 {
 	FILE *file;
-	char line[100];
-	char *token;
-	int i = 0;
+	char line[200];
 	unsigned int line_num = 0;
-	stack_t *head = malloc(sizeof(stack_t));
-
-	if (head == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+	stack_t *head = NULL; /* empty stack */
 
 	if (argv[1] == NULL || argc > 2)
 	{
@@ -37,17 +29,17 @@ int main(int argc, char **argv)
 	while ((fgets(line, sizeof(line), file)) != NULL)
 	{
 		line_num++;
-		token = strtok(line, " \n\t\a\r;:");
-		while (token != NULL)
-		{
-			args[i] = token;
-			i++;
-			token = strtok(NULL, " \n\t\a\r;:");
-		}
-		args[i] = NULL;
+		if (strlen(line) == 0) /*skip empty lines*/
+			continue;
+
+		split_line_args(line); /*split line argument into variable args*/
+
+		if (*args == NULL) /*skip empty lines having delimiters */
+			continue;
+
 		if (op_func_select() == NULL)
 		{
-			fprintf(stderr, "%u: unknown instruction %s\n", line_num, args[0]);
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_num, args[0]);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -55,4 +47,25 @@ int main(int argc, char **argv)
 	}
 	fclose(file);
 	return (0);
+}
+
+/**
+ * split_line_args - split line arguments
+ * @line: opcode line in file
+ * Return: Nothing
+ */
+void split_line_args(char *line)
+{
+	int i;
+	char *token;
+
+	token = strtok(line, " \n\t\a\r;:");
+	i = 0;
+	while (token != NULL)
+	{
+		args[i] = token;
+		token = strtok(NULL, " \n\t\a\r;:");
+		i++;
+	}
+	args[i] = NULL;
 }

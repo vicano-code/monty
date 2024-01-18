@@ -12,7 +12,7 @@ void push(stack_t **head, unsigned int line_num)
 
 	if (args[1] == NULL || sizeof(atoi(args[1])) != sizeof(int))
 	{
-		fprintf(stderr, "%d: usage: push integer\n", line_num);
+		fprintf(stderr, "L%u: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
 	}
 	new = malloc(sizeof(stack_t));
@@ -23,10 +23,10 @@ void push(stack_t **head, unsigned int line_num)
 	}
 	if (*head == NULL)
 	{
-		*head = new;
 		new->n = atoi(args[1]);
 		new->prev = NULL;
 		new->next = NULL;
+		*head = new;
 	}
 	else
 	{
@@ -53,7 +53,7 @@ void pall(stack_t **head, unsigned int line_num)
 	if (*head != NULL)
 	{
 		ptr = *head;
-		while (ptr->next != NULL)
+		while (ptr)
 		{
 			printf("%d\n", ptr->n);
 			ptr = ptr->next;
@@ -69,7 +69,7 @@ void pall(stack_t **head, unsigned int line_num)
  */
 void pint(stack_t **head, unsigned int line_num)
 {
-	if (head == NULL || *head == NULL)
+	if (head == NULL || *head == 0)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);

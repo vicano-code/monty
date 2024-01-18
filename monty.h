@@ -43,6 +43,7 @@ typedef struct instruction_s
 /* @args: op file tokenized line arguments*/
 extern char *args[];
 
+void split_line_args(char *line);
 void (*op_func_select(void))(stack_t **head, unsigned int line_num);
 void push(stack_t **head, unsigned int line_num);
 void pall(stack_t **head, unsigned int line_num);
