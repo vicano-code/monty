@@ -56,6 +56,7 @@ void pstr(stack_t **head, unsigned int line_num)
 {
 	stack_t *ptr;
 
+	(void)line_num;
 	ptr = *head;
 	while (ptr != NULL && ptr->n != 0 &&
 			(*head)->n >= 0 && (*head)->n <= 127)
@@ -86,7 +87,7 @@ void rotl(stack_t **head, unsigned int line_num)
 		while (ptr)
 			ptr = ptr->next;
 		ptr->next = *head;
-		*head->prev = ptr;
+		(*head)->prev = ptr;
 		ptr->next->next = NULL;
 		*head = (*head)->next;
 		(*head)->next->prev = NULL;
