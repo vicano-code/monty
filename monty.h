@@ -55,5 +55,9 @@ void nop(stack_t **head, unsigned int line_num);
 void _sub(stack_t **head, unsigned int line_num);
 void _div(stack_t **head, unsigned int line_num);
 void _mul(stack_t **head, unsigned int line_num);
+void _mod(stack_t **head, unsigned int line_num);
+void pchar(stack_t **head, unsigned int line_num);
+void pstr(stack_t **head, unsigned int line_num);
+void rotl(stack_t **head, unsigned int line_num);
 
 #endif

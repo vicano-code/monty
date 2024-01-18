@@ -20,6 +20,10 @@ void (*op_func_select(void))(stack_t **h, unsigned int line_num)
 		{"sub", _sub},
 		{"div", _div},
 		{"mul", _mul},
+		{"mod", _mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
 		{NULL, NULL}
 	};
 	while (ops[i].opcode != NULL)
