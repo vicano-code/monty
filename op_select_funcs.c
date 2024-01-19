@@ -24,6 +24,7 @@ void (*op_func_select(void))(stack_t **h, unsigned int line_num)
 		{"pchar", pchar},
 		{"pstr", pstr},
 		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 	while (ops[i].opcode != NULL)

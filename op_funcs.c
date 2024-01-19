@@ -15,6 +15,8 @@ void push(stack_t **head, unsigned int line_num)
 		free_dlistint(*head);
 		exit(EXIT_FAILURE);
 	}
+	if (strcmp(args[1], "-0") == 0)
+		args[1] = "0";
 	if (strcmp(args[1], "0") != 0 && atoi(args[1]) == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_num);
@@ -26,28 +28,6 @@ void push(stack_t **head, unsigned int line_num)
 		free_dlistint(*head);
 		exit(EXIT_FAILURE);
 	}
-	/*new = malloc(sizeof(stack_t));
-	if (new == NULL)
-	{
-		fprintf(stderr, "memory allocation failure\n");
-		exit(EXIT_FAILURE);
-	}
-	if (*head == NULL)
-	{
-		new->n = atoi(args[1]);
-		new->prev = NULL;
-		new->next = NULL;
-		*head = new;
-	}
-	else
-	{
-		tmp = *head;
-		new->n = atoi(args[1]);
-		*head = new;
-		new->prev = NULL;
-		new->next = tmp;
-		tmp->prev = new;
-	}*/
 }
 
 /**
@@ -127,7 +107,7 @@ void swap(stack_t **head, unsigned int line_num)
 {
 	stack_t *tmp, *ptr;
 
-	if ((*head)->next == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_num);
 		exit(EXIT_FAILURE);

@@ -31,11 +31,12 @@ int main(int argc, char **argv)
 		line_num++;
 		if (strlen(line) == 0) /*skip empty lines*/
 			continue;
-		split_line_args(line); /*split line argument into variable args*/
+		split_line_args(line); /*split line argument into variable args */
 
-		if (*args == NULL) /*skip empty lines having delimiters */
+		if (*args == NULL) /*skip empty lines having delimiters*/
 			continue;
-		if (strcmp(args[0], "#") == 0)
+		/*for skipping lines with first non-space character #comment*/
+		if (strcmp(args[0], "#") == 0 || args[0][0] == '#')
 			continue;
 		if (op_func_select() == NULL)
 		{

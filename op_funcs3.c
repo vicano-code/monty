@@ -59,7 +59,7 @@ void pstr(stack_t **head, unsigned int line_num)
 	(void)line_num;
 	ptr = *head;
 	while (ptr != NULL && ptr->n != 0 &&
-			(*head)->n >= 0 && (*head)->n <= 127)
+			ptr->n >= 0 && ptr->n <= 127)
 	{
 		printf("%c", ptr->n);
 		ptr = ptr->next;
@@ -80,17 +80,18 @@ void rotl(stack_t **head, unsigned int line_num)
 	stack_t *ptr;
 
 	(void)line_num;
-	ptr = *head;
 
-	if (ptr->next == NULL)
+	if (*head != NULL && (*head)->next != NULL)
 	{
-		while (ptr)
+		ptr = *head;
+		while (ptr->next != NULL)
 			ptr = ptr->next;
-		ptr->next = *head;
+
 		(*head)->prev = ptr;
-		ptr->next->next = NULL;
-		*head = (*head)->next;
+		ptr->next = *head;
 		(*head)->next->prev = NULL;
+		*head = (*head)->next;
+		ptr->next->next = NULL;
 	}
 }
 
@@ -107,15 +108,15 @@ void rotr(stack_t **head, unsigned int line_num)
 
 	(void)line_num;
 	ptr = *head;
-	if ((*head)->next != NULL)
+	if (*head != NULL && (*head)->next != NULL)
 	{
-		while (ptr)
+		while (ptr->next != NULL)
 			ptr = ptr->next;
+
+		ptr->prev->next = NULL;
 		(*head)->prev = ptr;
 		ptr->next = *head;
-		ptr->prev->next = NULL;
 		ptr->prev = NULL;
 		*head = ptr;
-
 	}
 }
