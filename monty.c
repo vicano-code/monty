@@ -45,6 +45,7 @@ int main(int argc, char **argv)
 		else
 			op_func_select()(&head, line_num);
 	}
+	free_dlistint(head);
 	fclose(file);
 	return (0);
 }

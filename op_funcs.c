@@ -8,19 +8,25 @@
  */
 void push(stack_t **head, unsigned int line_num)
 {
-	stack_t *new, *tmp;
 
 	if (args[1] == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_num);
+		free_dlistint(*head);
 		exit(EXIT_FAILURE);
 	}
 	if (strcmp(args[1], "0") != 0 && atoi(args[1]) == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_num);
+		free_dlistint(*head);
 		exit(EXIT_FAILURE);
 	}
-	new = malloc(sizeof(stack_t));
+	if (add_dnodeint(head, atoi(args[1])) == NULL)
+	{
+		free_dlistint(*head);
+		exit(EXIT_FAILURE);
+	}
+	/*new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		fprintf(stderr, "memory allocation failure\n");
@@ -41,7 +47,7 @@ void push(stack_t **head, unsigned int line_num)
 		new->prev = NULL;
 		new->next = tmp;
 		tmp->prev = new;
-	}
+	}*/
 }
 
 /**
