@@ -8,6 +8,7 @@
  */
 void push(stack_t **head, unsigned int line_num)
 {
+	int i;
 
 	if (args[1] == NULL)
 	{
@@ -22,6 +23,20 @@ void push(stack_t **head, unsigned int line_num)
 		fprintf(stderr, "L%u: usage: push integer\n", line_num);
 		free_dlistint(*head);
 		exit(EXIT_FAILURE);
+	}
+	if (args[1][0] == '-')
+		i = 1;
+	else
+		i = 0;
+	while (args[1][i] != '\0') /*identify non-integer element*/
+	{
+		if (!isdigit(args[1][i]))
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", line_num);
+			free_dlistint(*head);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 	if (add_dnodeint(head, atoi(args[1])) == NULL)
 	{
